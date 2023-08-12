@@ -1,16 +1,16 @@
 import HttpStatus from 'http-status-codes';
-import * as Service from '../services';
+import * as UserService from '../services';
 
 // Retorna todos os usuários
-export const getAll = (req, res) => {
-    const s = Service.getAlls();
+export const getAllUsers = (req, res) => {
+    const s = UserService.getAlls();
     res.status(HttpStatus.OK).json(s);
 };
 
 // Retorna um usuário pelo ID
-export const getById = (req, res) => {
+export const getUserById = (req, res) => {
     const Id = req.params.id;
-    const object = Service.getById(Id);
+    const object = UserService.getById(Id);
 
     if (!object) {
         return res.status(HttpStatus.NOT_FOUND).json({
@@ -22,17 +22,17 @@ export const getById = (req, res) => {
 };
 
 // Cria um novo usuário
-export const create = (req, res) => {
+export const createUser = (req, res) => {
     const object = req.body;
-    const created = Service.create(object);
+    const created = UserService.create(object);
     res.status(HttpStatus.CREATED).json(created);
 };
 
 // Atualiza um usuário existente
-export const update = (req, res) => {
+export const updateUser = (req, res) => {
     const Id = req.params.id;
     const updatedData = req.body;
-    const updated = Service.update(Id, updatedData);
+    const updated = UserService.update(Id, updatedData);
 
     if (!updated) {
         return res.status(HttpStatus.NOT_FOUND).json({
@@ -44,9 +44,9 @@ export const update = (req, res) => {
 };
 
 // Exclui um usuário
-export const deleteId = (req, res) => {
+export const deleteUser = (req, res) => {
     const Id = req.params.id;
-    const deleted = Service.delete(Id);
+    const deleted = UserService.delete(Id);
 
     if (!deleted) {
         return res.status(HttpStatus.NOT_FOUND).json({
