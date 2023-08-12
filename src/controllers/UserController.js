@@ -1,58 +1,66 @@
-import HttpStatus from 'http-status-codes';
-import * as UserService from '../services';
+const StatusCodes = require('http-status-codes');
+const UserService = require('../services/UserService');
 
 // Retorna todos os usuários
-export const getAllUsers = (req, res) => {
-    const s = UserService.getAlls();
-    res.status(HttpStatus.OK).json(s);
+const getAllUsers = (req, res) => {
+    const User = UserService.getAllUsers();
+    res.status(StatusCodes.OK).json(User);
 };
 
 // Retorna um usuário pelo ID
-export const getUserById = (req, res) => {
+const getUserById = (req, res) => {
     const Id = req.params.id;
-    const object = UserService.getById(Id);
+    const User = UserService.getUserById(Id);
 
-    if (!object) {
-        return res.status(HttpStatus.NOT_FOUND).json({
+    if (!User) {
+        return res.status(StatusCodes.NOT_FOUND).json({
             error: 'Usuário não encontrado'
         });
     }
 
-    res.status(HttpStatus.OK).json();
+    res.status(StatusCodes.OK).json();
 };
 
 // Cria um novo usuário
-export const createUser = (req, res) => {
-    const object = req.body;
-    const created = UserService.create(object);
-    res.status(HttpStatus.CREATED).json(created);
+const createUser = (req, res) => {
+    const User = req.body;
+    const createdUser = UserService.createUser(User);
+    res.status(StatusCodes.CREATED).json(createdUser);
 };
 
 // Atualiza um usuário existente
-export const updateUser = (req, res) => {
+const updateUser = (req, res) => {
     const Id = req.params.id;
     const updatedData = req.body;
-    const updated = UserService.update(Id, updatedData);
+    const updated = UserService.updateUser(Id, updatedData);
 
     if (!updated) {
-        return res.status(HttpStatus.NOT_FOUND).json({
+        return res.status(StatusCodes.NOT_FOUND).json({
             error: 'Usuário não encontrado'
         });
     }
 
-    res.status(HttpStatus.OK).json(updated);
+    res.status(StatusCodes.OK).json(updated);
 };
 
 // Exclui um usuário
-export const deleteUser = (req, res) => {
+const deleteUser = (req, res) => {
     const Id = req.params.id;
-    const deleted = UserService.delete(Id);
+    const deleted = UserService.deleteUser(Id);
 
     if (!deleted) {
-        return res.status(HttpStatus.NOT_FOUND).json({
+        return res.status(StatusCodes.NOT_FOUND).json({
             error: 'Usuário não encontrado'
         });
     }
 
-    res.status(HttpStatus.NO_CONTENT).send();
+    res.status(StatusCodes.NO_CONTENT).send();
+};
+
+exports.module = {
+    getAllUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser
 };

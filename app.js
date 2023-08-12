@@ -7,7 +7,7 @@ require('dotenv').config();
 
 app.use(express.json());
 
-app.use('/api', router);
+app.use(router);
 
 app.listen(PORT, () => {
     console.info(`Servidor rodando na porta ${PORT}`);

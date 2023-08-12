@@ -1,70 +1,42 @@
-import fs from 'fs';
-import path from 'path';
-import { UserModel } from '../models/UserModel.js';
+const User = require('../models/userModel.js');
 
-const dataFilePath = path.join(__dirname, '..', 'dados.json');
+const users = [User];
 
-// Lê os dados do arquivo JSON
-const readData = () => {
-    const rawData = fs.readFileSync(dataFilePath);
-    return JSON.parse(rawData);
+const getAllUsers = () => {
+    return users;
 };
 
-// Escreve os dados no arquivo JSON
-const writeData = (data) => {
-    fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
+const getUserById = (userId) => {
+    return users.find(user => user.id === userId);
 };
 
-// Retorna todos os usuários
-export const getAllUsers = () => {
-    const data = readData();
-    return data.users || [];
-};
-
-// Retorna um usuário pelo ID
-export const getUserById = (userId) => {
-    const data = readData();
-    const user = data.users.find((user) => user.id === userId);
-    return user || null;
-};
-
-// Cria um novo usuário
-export const createUser = (userData) => {
-    const data = readData();
-    const newUser = {
-        id: Date.now().toString(),
-        ...userData
-    };
-    data.users.push(newUser);
-    writeData(data);
+const createUser = (userData) => {
+    const newUser = new User(Date.now().toString(), userData.name, userData.email);
+    users.push(newUser);
     return newUser;
 };
 
-// Atualiza um usuário existente
-export const updateUser = (userId, updatedUserData) => {
-    const data = readData();
-    const userIndex = data.users.findIndex((user) => user.id === userId);
-    if (userIndex === -1) {
-        return null;
+const updateUser = (userId, updatedUserData) => {
+    const userToUpdate = users.find(user => user.id === userId);
+    if (userToUpdate) {
+        Object.assign(userToUpdate, updatedUserData);
+        return userToUpdate;
     }
-    data.users[userIndex] = {
-        ...data.users[userIndex],
-        ...updatedUserData
-    };
-    writeData(data);
-    return data.users[userIndex];
+    return null;
 };
 
-// Exclui um usuário
-export const deleteUser = (userId) => {
-    const data = readData();
-    const userIndex = data.users.findIndex((user) => user.id === userId);
-    if (userIndex === -1) {
-        return null;
+const deleteUser = (userId) => {
+    const userIndex = users.findIndex(user => user.id === userId);
+    if (userIndex !== -1) {
+        return users.splice(userIndex, 1)[0];
     }
-    const deletedUser = data.users.splice(userIndex, 1)[0];
-    writeData(data);
-    return deletedUser;
+    return null;
 };
 
-module.exports = UserService
+exports.module = {
+    getAllUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser
+};

@@ -1,5 +1,5 @@
 // models/userModel.js
-class User {
+const User = {
     constructor(id, name, email) {
         this.id = id;
         this.name = name;
@@ -7,4 +7,4 @@ class User {
     }
 }
 
-export default User;
+exports.module = User;

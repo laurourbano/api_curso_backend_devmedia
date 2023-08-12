@@ -1,34 +1,12 @@
 const express = require('express');
+const userController = require('../controllers/userController.js');
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.status(200).json({
-        message: 'get em json!'
-    });
-});
+router.get('/', userController.getAllUsers);
+router.get('/:id', userController.getUserById);
+router.post('/', userController.createUser);
+router.put('/:id', userController.updateUser);
+router.delete('/:id', userController.deleteUser);
 
-router.get('/:id', (req, res) => {
-    res.status(200).json({
-        message: 'getById em json!'
-    });
-});
-
-router.post('/', (req, res) => {
-    res.status(201).json({
-        message: 'post em json!'
-    });
-});
-
-router.put('/:id', (req, res) => {
-    res.status(202).json({
-        message: 'put em json!'
-    });
-});
-
-router.delete('/:id', (req, res) => {
-    res.status(204).json({
-        message: 'delete em json!'
-    });
-});
-
-module.exports = router;
+exports.module = router;
