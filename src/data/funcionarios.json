@@ -1,0 +1,67 @@
+[{
+        "id": "1",
+        "nome": "Ana",
+        "ramal": "9501",
+        "email": "ana@employee.com",
+        "status": "ativo",
+        "departamento": {
+            "id": "1",
+            "nome": "TI"
+        }
+    },
+    {
+        "id": "2",
+        "nome": "João",
+        "ramal": "9502",
+        "email": "joao@employee.com",
+        "status": "ativo",
+        "departamento": {
+            "id": "1",
+            "nome": "TI"
+        }
+    },
+    {
+        "id": "3",
+        "nome": "Maria",
+        "ramal": "9503",
+        "email": "maria@employee.com",
+        "status": "ativo",
+        "departamento": {
+            "id": "2",
+            "nome": "RH"
+        }
+    },
+    {
+        "id": "4",
+        "nome": "José",
+        "ramal": "9504",
+        "email": "jose@employee.com",
+        "status": "inativo",
+        "departamento": {
+            "id": "2",
+            "nome": "RH"
+        }
+    },
+    {
+        "id": "5",
+        "nome": "Pedro",
+        "ramal": "9505",
+        "email": "pedro@employee.com",
+        "status": "ativo",
+        "departamento": {
+            "id": "3",
+            "nome": "Financeiro"
+        }
+    },
+    {
+        "id": "6",
+        "nome": "Jacira",
+        "ramal": "9506",
+        "email": "jacira@employee.com",
+        "status": "ativo",
+        "departamento": {
+            "id": "3",
+            "nome": "Financeiro"
+        }
+    }
+]
